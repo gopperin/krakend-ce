@@ -13,7 +13,10 @@ import (
 	cmd "github.com/devopsfaith/krakend-cobra/v2"
 	flexibleconfig "github.com/devopsfaith/krakend-flexibleconfig/v2"
 	viper "github.com/devopsfaith/krakend-viper/v2"
+	"github.com/gin-gonic/gin"
 	"github.com/luraproject/lura/v2/config"
+
+	"github.com/devopsfaith/krakend-ce/v2/internal/middlewares"
 )
 
 const (
@@ -57,7 +60,17 @@ func main() {
 		})
 	}
 
-	cmd.Execute(cfg, krakend.NewExecutor(ctx))
+	nm := middlewares.InitNilMiddleware()
+	sm := middlewares.InitSignatureMiddleware()
+
+	eb := krakend.ExecutorBuilder{
+		Middlewares: []gin.HandlerFunc{
+			nm.Apply,
+			sm.Apply,
+		},
+	}
+
+	cmd.Execute(cfg, eb.NewCmdExecutor(ctx))
 }
 
 var aliases = map[string]string{

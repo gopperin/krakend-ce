@@ -1,6 +1,6 @@
 module github.com/devopsfaith/krakend-ce/v2
 
-go 1.17
+go 1.18
 
 require (
 	github.com/devopsfaith/bloomfilter/v2 v2.0.0
