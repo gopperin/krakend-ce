@@ -16,6 +16,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/luraproject/lura/v2/config"
 
+	myconfig "github.com/devopsfaith/krakend-ce/v2/internal/config"
 	"github.com/devopsfaith/krakend-ce/v2/internal/middlewares"
 )
 
@@ -41,6 +42,9 @@ func main() {
 		case <-ctx.Done():
 		}
 	}()
+
+	// setup config
+	myconfig.Setup("./")
 
 	krakend.RegisterEncoders()
 
