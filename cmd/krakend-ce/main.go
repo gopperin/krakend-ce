@@ -64,6 +64,8 @@ func main() {
 		})
 	}
 
+	// cmd.Execute(cfg, krakend.NewExecutor(ctx))
+
 	nm := middlewares.InitNilMiddleware()
 	sm := middlewares.InitSignatureMiddleware()
 
